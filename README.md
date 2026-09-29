@@ -5,8 +5,7 @@ Networks*. It constructs the generalized MGS stabilizer code family
 
     [[ (2*alpha + beta) * p,  beta * p,  d ]]_2
 
-and computes two analytical upper bounds on its minimum distance. **This
-repository reproduces Table 2 of the paper.**
+and computes two analytical upper bounds on its minimum distance.
 
 ## Requirements
 
@@ -50,22 +49,13 @@ centralizer of the stabilizer group but not in the group itself:
 
 * `d_A = 1 + |I|_min` — from a Case-1 (message-qubit) logical operator.
   Grows with `p`; unaffected by the choice of `J`.
-  Certified via `meta['d_A_certified']` and `meta['d_A_witness_weight']`.
 * `d_C = 2 + 2|J|` — from a Case-2 (check-qubit) logical operator.
   Constant in `alpha, beta, p`; increases with `|J|`.
-  Certified column by column inside `build_HMGS` (use `verbose=True` to see it).
-
 `test_mgs.py` additionally checks, for several parameter sets, that the
 generators commute under the symplectic form and that `rank(H) = 2r`, i.e.
 that the output really is an `[[n, k, d]]` stabilizer code.
 
-## A note on the greedy construction
 
-`U` is built greedily: powers `Q^i` are added one at a time and kept only
-if the full-rank condition still holds. The scan runs `i = 0, 1, ..., p-1`.
-A different scan order could in principle yield a different `U`; in the
-cases we tested, `d_A` was unchanged, but the construction is a greedy one
-and is not claimed to be canonical.
 
 ## Files
 
@@ -75,6 +65,3 @@ and is not claimed to be canonical.
 | `reproduce_table2.py`  | regenerates Table 2 of the paper              |
 | `test_mgs.py`          | self-checks                                   |
 
-## Citation
-
-If you use this code, please cite the paper.
